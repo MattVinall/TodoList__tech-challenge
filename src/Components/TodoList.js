@@ -36,7 +36,7 @@ export default class TodoList extends Component {
 		// check if input is empty - alert user to input a todo
 		if (todo.text === '') {
 			alert('please enter a todo item');
-		} else if (this.state.todos.indexOf(todo.text) > -1) {
+		} else if (this.state.todos.indexOf(todo.id) > -1) {
 			alert('this todo already exists');
 		} else {
 			// set state and add to todos array
@@ -77,17 +77,16 @@ export default class TodoList extends Component {
 				<ul>
 					{this.state.todos.map((todo, index) => {
 						return (
-							<li
-								key={index}
-								className={this.state.todos[index].isComplete ? 'complete' : 'none'}
-								onClick={() => this.handleClick(index)}
-							>
+							<li key={index} className={this.state.todos[index].isComplete ? 'complete' : 'none'}>
 								{todo.text}
-								{/* <button onClick={() => this.handleClick(index)}>X</button> */}
+								<button onClick={() => this.handleClick(index)}>X</button>
 							</li>
 						);
 					})}
 				</ul>
+				<o>
+					{this.state.numberComplete} of {this.state.todos.length}
+				</o>
 			</div>
 		);
 	}
